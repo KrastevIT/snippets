@@ -55,8 +55,6 @@ const stickyContent = () => {
       }
 
       let $sidebarActive = $container.find('.js-sticky-container.is-active');
-
-      $('.js-sticky-burger li').eq($sidebarActive.index()).addClass('is-active').siblings().removeClass('is-active');
     });
   });
 };
