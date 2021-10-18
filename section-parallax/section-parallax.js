@@ -53,8 +53,6 @@ const stickyContent = () => {
           $sidebar.removeClass('is-active');
         }
       }
-
-      let $sidebarActive = $container.find('.js-sticky-container.is-active');
     });
   });
 };
