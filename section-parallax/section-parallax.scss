@@ -1,0 +1,39 @@
+.section-parallax {
+  position: relative;
+
+  .section__container {
+    width: 100%;
+    height: 100vh;
+  }
+  
+  .section__slide {
+    overflow: auto;
+    width: 100%;
+    height: inherit;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.9s, visibility 0.9s;
+
+    &::-webkit-scrollbar {
+      width: 0;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: transparent;
+      outline: none;
+    }
+  }
+
+  .is-fixed {
+    position: fixed;
+  }
+
+  .is-active .section__slide {
+    opacity: 1;
+    visibility: visible;
+  }
+}
