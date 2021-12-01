@@ -1,42 +1,28 @@
-<product-recommendations class="product-recommendations page-width" data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit=4">
-  {% if recommendations.performed and recommendations.products_count > 0 %}
-    <ul>
-      {% for recommendation in recommendations.products %}
-        <li>
-          {% render 'product-card' product: product %}
-        </li>
-      {% endfor %}
-    </ul>
-  {% endif %}
-</product-recommendations>
+<div
+    class="product-recommendations"
+    data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit=10"
+  >
+    {%- if recommendations.performed and recommendations.products_count > 0 -%}
+      <h2 class="section__title">
+        You might also like
+      </h2><!-- /.section__title -->
+  
+      <div class="slider slider--products js-slider-products">
+        <div class="slider__clip">
+          <div class="slider__slides slick-slider-products products">
+              {%- for product in recommendations.products -%}
+                <div class="slider__slide products__item">
+                 {% render 'product-card' product: product %}
+                </div><!-- /.slider__slide -->
+              {%- endfor -%}
+          </div><!-- /.slider__slides -->
+        </div><!-- /.slider__clip -->
 
-{% javascript %}
-  class ProductRecommendations extends HTMLElement {
-    constructor() {
-      super();
+        <div class="slider__actions">
+          <a href="#" class="slider__prev">Previous</a>
 
-      const handleIntersection = (entries, observer) => {
-        if (!entries[0].isIntersecting) return;
-        observer.unobserve(this);
-
-        fetch(this.dataset.url)
-          .then(response => response.text())
-          .then(text => {
-            const html = document.createElement('div');
-            html.innerHTML = text;
-            const recommendations = html.querySelector('product-recommendations');
-            if (recommendations && recommendations.innerHTML.trim().length) {
-              this.innerHTML = recommendations.innerHTML;
-            }
-          })
-          .catch(e => {
-            console.error(e);
-          });
-      }
-
-      new IntersectionObserver(handleIntersection.bind(this), {rootMargin: '0px 0px 200px 0px'}).observe(this);
-    }
-  }
-
-  customElements.define('product-recommendations', ProductRecommendations);
-{% endjavascript %}
+          <a href="#" class="slider__next">Next</a>
+        </div><!-- /.slider__actions -->
+      </div><!-- /.slider js-slider -->
+    {%- endif -%}
+  </div>
