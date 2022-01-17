@@ -1,0 +1,28 @@
+/* ------------------------------------------------------------ *\
+  Slick
+\* ------------------------------------------------------------ */
+
+.slick-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  font-size: 0;
+  border: solid $base;
+  background: transparent;
+  padding: 5px;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.slick-next {
+  right: 0;
+  border-width: 2px 2px 0 0;
+}
+
+.slick-prev {
+  left: 0;
+  border-width: 0 0 2px 2px;
+}
+
+.slick-disabled {
+  opacity: 0.3;
+}
