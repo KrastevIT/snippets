@@ -1,0 +1,41 @@
+/* ------------------------------------------------------------ *\
+  Image
+\* ------------------------------------------------------------ */
+
+.section-image {
+  .section__image {
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .section__image--tablet,
+  .section__image--mobile {
+    display: none;
+  }
+
+  .section__image--tablet {
+     @media(max-width: 1024px) {
+      display: block;
+    }
+  }
+
+  .section__image--mobile {
+     @media(max-width: 767px) {
+      display: block;
+    }
+  }
+
+  .section__image--tablet-hidden {
+     @media(max-width: 1024px) {
+      display: none;
+    }
+  }
+
+  .section__image--mobile-hidden {
+     @media(max-width: 767px) {
+      display: none;
+    }
+  }
+}
