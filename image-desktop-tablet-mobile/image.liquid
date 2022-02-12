@@ -1,0 +1,55 @@
+{% assign _section = section.settings %}
+
+<section class="section-image">
+  {% if _section.image_desktop %}
+    <div class="
+      section__image
+      section__image--desktop
+      {% if _section.image_tablet %}section__image--tablet-hidden{% endif %}
+      {% if _section.image_mobile %}section__image--mobile-hidden{% endif %}
+    ">
+      <img src="{{ _section.image_desktop | image_url: width: 1920 }}" alt="{{ _section.image_desktop.alt }}">
+    </div><!-- /.section__image -->
+  {% endif %}
+
+  {% if _section.image_tablet %}
+    <div class="
+      section__image
+      section__image--tablet
+      {% if _section.image_mobile %}section__image--mobile-hidden{% endif %}
+    ">
+      <img src="{{ _section.image_tablet | image_url: width: 1920 }}" alt="{{ _section.image_tablet.alt }}">
+    </div><!-- /.section__image -->
+  {% endif %}
+
+  {% if _section.image_mobile %}
+    <div class="section__image section__image--mobile">
+      <img src="{{ _section.image_mobile | image_url: width: 1920 }}" alt="{{ _section.image_mobile.alt }}">
+    </div><!-- /.section__image -->
+  {% endif %}
+</section><!-- /.section-image -->
+
+{% schema %}
+{
+  "name": "Image",
+  "settings": [
+  {
+    "type": "image_picker",
+    "id": "image_desktop",
+    "label": "Image desktop"
+  },
+  {
+    "type": "image_picker",
+    "id": "image_tablet",
+    "label": "Image tablet"
+  },
+  {
+    "type": "image_picker",
+    "id": "image_mobile",
+    "label": "Image mobile"
+  }],
+  "presets": [{
+    "name": "Image"
+  }]
+}
+{% endschema %}
