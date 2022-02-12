@@ -1,0 +1,79 @@
+{% assign _section = section.settings %}
+{% assign _blocks = section.blocks %}
+
+{% if _blocks.size > 0 %}
+  <section class="multicolumn">
+    <ul class="
+      {% if _section.slider %}js-slider-multicolumn{% else %}not-slider{% endif %}"
+      show-per-row="{{ _section.show_per_row }}"
+      slides-to-scroll="{{ _section.slides_to_scroll }}"
+    >
+      {% for block in _blocks %}
+        {% assign _block = block.settings %}
+
+        {% if _block.image %}
+          <li>
+            <div class="multicolumn__image">
+              <a href="{{ _block.url }}">
+                <img src="{{ _block.image | image_url: width: 600 }}" alt="{{ _block.image.alt }}">
+              </a>
+            </div><!-- /.multicolumn__image -->
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </section><!-- /.multicolumn -->
+{% endif %}
+
+{% schema %}
+{
+  "name": "Multicolumn",
+  "settings": [
+  {
+    "type": "header",
+    "content": "Slider"
+  },
+  {
+    "type": "checkbox",
+    "id": "slider",
+    "label": "Enable slider"
+  },
+  {
+    "type": "range",
+    "id": "show_per_row",
+    "min": 2,
+    "max": 6,
+    "step": 1,
+    "label": "Show per row",
+    "default": 3
+  },
+  {
+    "type": "range",
+    "id": "slides_to_scroll",
+    "min": 1,
+    "max": 6,
+    "step": 1,
+    "label": "Slides to scroll",
+    "default": 1
+  }],
+  "blocks": [
+  {
+    "type": "image",
+    "name": "Image",
+    "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "url",
+      "label": "Link"
+    }]
+  }],
+  "presets": [{
+    "name": "Multicolumn"
+  }]
+}
+{% endschema %}
