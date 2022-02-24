@@ -1,0 +1,14 @@
+<div class="faq__accordions">
+  {%- assign parts = page.content | split: '<h3>' -%}
+
+  {%- for part in parts -%}
+    {%- assign title = part | split: '</h3>' | first -%}
+    {%- assign accordion_content = part | split: '</h3>' | last -%}
+
+    {% if title != blank %}
+      <h3>{{ title }}</h3>
+    {% endif %}
+
+    {%- render 'accordion' _content: accordion_content, tag: 'h6', residual_content: true, additional_classes: 'accordion accordion--faq', accordion_title_tag: 'h6', slide_toggle: true -%}
+  {%- endfor -%}
+</div><!-- /.faq__accordions -->
