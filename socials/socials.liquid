@@ -21,7 +21,7 @@ social_vimeo_link|Vimeo
     {% if link != blank %}
       <li>
         <a href="{{ link | escape }}">
-          <img src="{{ social_ico | asset_url }}" alt="social_name">
+          <img src="{{ social_ico | asset_url }}" alt="{{ social_name }}">
         </a>
       </li>
     {% endif %}
