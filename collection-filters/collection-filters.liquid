@@ -1,0 +1,116 @@
+{% assign filters_active = blank %}
+
+<form>
+  <div class="filters">
+    <h6>Filter by:</h6>
+
+    {% for filter in collection.filters %}
+      <div class="filter js-filter">
+        <div class="filter__head">
+          <span class="js-filter-label">
+            {{ filter.label }}
+
+            <strong></strong>
+          </span>
+        </div class="filter__head">
+
+        <div class="filter__group hidden">
+          <div class="filter__meta">
+            <p>{{ filter.active_values | size }} selected</p>
+
+            <a href="{{ filter.url_to_remove }}" class="filter__remove">Reset</a>
+          </div><!-- /.filter__meta -->
+
+          {% if filter.type == 'price_range' %}
+
+            <div class="filter__price-range">
+              <div class="filter__price-range-controls">
+                <span>{{ cart.currency.symbol }}</span>
+                <input
+                  id="Filter-{{ filter.min_value.param_name }}"
+                  name="{{ filter.min_value.param_name }}"
+                  type="text" value="{{ filter.min_value.value | money_without_currency }}"
+                  value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
+                  placeholder="From"
+                >
+              </div><!-- /.filter__price-range-controls -->
+
+              <div class="filter__price-range-controls">
+                <span>{{ cart.currency.symbol }}</span>
+                <input
+                  id="Filter-{{ filter.max_value.param_name }}"
+                  name="{{ filter.max_value.param_name }}"
+                  type="text"
+                  value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
+                  placeholder="To"
+                >
+              </div><!-- /.filter__price-range-controls -->
+            </div><!-- /.filter__price-range -->
+
+            <div class="filter__price-range-actions">
+              <input type="submit" value="Apply">
+            </div><!-- /.filter__price-range-actions -->
+
+            {% if filter.min_value.value != nil or filter.max_value.value != nil %}
+              {% capture filters_active %}
+                {{filters_active}}
+
+                <li>
+                  <a href="{{ filter.url_to_remove }}">
+                    {{ filter.min_value.value | money }}
+                    -
+                    {{ filter.max_value.value | money }}
+                    <span>x</span>
+                  </a>
+                </li>
+              {% endcapture %}
+            {% endif %}
+
+          {% else %}
+            <ul>
+              {%- for filter_value in filter.values -%}
+
+              {% if filter_value.active %}
+                {% capture filters_active %}
+                  {{filters_active}}
+
+                  <li>
+                    <a href="{{ filter_value.url_to_remove }}">
+                      {{ filter_value.label }}
+
+                      <span>x</span>
+                    </a>
+
+                    <input
+                      class="hidden"
+                      type="text"
+                      name="{{ filter_value.param_name }}"
+                      value="{{ filter_value.value }}"
+                      id="Filter-{{ filter.param_name }}-{{ forloop.index }}">
+                  </li>
+
+                {% endcapture %}
+              {% endif %}
+
+              <li>
+                <a href="{% if filter_value.active %}{{ filter_value.url_to_remove }}{% else %}{{filter_value.url_to_add}}{% endif %}">
+                  <span {% if filter_value.active %}class="checked"{% endif %}></span>
+
+                  {{ filter_value.label }}
+                </a>
+              </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+
+        </div><!-- /.filter__group -->
+      </div class="filter">
+    {% endfor %}
+
+    {% if filters_active != blank %}
+      <ol>
+        {{filters_active}}
+      </ol>
+    {% endif %}
+  </div><!-- /.filters -->
+</form>
