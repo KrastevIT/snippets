@@ -1,0 +1,137 @@
+/* ------------------------------------------------------------ *\
+  Filter
+\* ------------------------------------------------------------ */
+
+.filter {
+  position: relative;
+  font-size: 16px;
+
+  & + & {
+    margin-left: 21px;
+  }
+
+  .filter__head {
+    position: relative;
+    color: #656565;
+    padding-right: 16px;
+
+    span {
+      cursor: pointer;
+    }
+
+    strong {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%) rotate(45deg);
+      border: solid #000;
+      border-width: 0 1px 1px 0;
+      padding: 3px;
+      margin-top: -2px;
+      transition: all 0.3s;
+    }
+  }
+
+  &.toggle {
+    .filter__head strong {
+      transform: translateY(6%) rotate(225deg);
+    }
+  }
+
+  .filter__group {
+    position: absolute;
+    top: 35px;
+    left: 0;
+    z-index: 999;
+    width: 350px;
+    background: #fff;
+    border: 1px solid #ddd;
+  }
+
+  .filter__meta {
+    display: flex;
+    justify-content: space-between;
+    border: solid #ddd;
+    border-width: 0 0 1px 0;
+    padding: 20px;
+  }
+
+  .filter__group ul {
+    list-style: none;
+    padding: 20px;
+
+    li + li {
+      margin-top: 10px;
+    }
+
+    span {
+      position: relative;
+      border: 1px solid #ddd;
+      padding: 7px;
+      margin-right: 10px;
+
+      &:after {
+        content: '✓';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        font-size: 13px;
+        line-height: 1;
+        opacity: 0;
+        transition: opacity 0.3s
+      }
+
+      &.checked:after {
+        opacity: 1;
+      }
+    }
+
+    a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+  }
+
+  .filter__price-range,
+   .filter__price-range-controls {
+    display: flex;
+    align-items: center
+  }
+
+  .filter__price-range  {
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .filter__price-range-controls {
+    width: 50%;
+
+    span {
+      margin-right: 5px;
+    }
+
+    input {
+      width: 100%;
+      height: 45px;
+      border: 1px solid #ddd;
+      padding: 10px;
+    }
+  }
+
+  .filter__price-range-actions {
+    input[type='submit'] {
+      display: block;
+      margin: 0 auto 20px;
+      border: 1px solid #ddd;
+      background: none;
+      padding: 5px 10px;
+      transition: opacity 0.3s;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+}
