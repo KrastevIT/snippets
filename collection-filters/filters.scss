@@ -1,0 +1,32 @@
+/* ------------------------------------------------------------ *\
+  Filters
+\* ------------------------------------------------------------ */
+
+.filters {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  line-height: 1;
+  letter-spacing: 0.04rem;
+
+  h6 {
+    margin: 0 19px 0 0;
+  }
+  
+  ol {
+    width: 100%;
+    font-size: 14px;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+
+    a {
+      display: inline-block;
+      text-decoration: none;
+      border: 1px solid #ddd;
+      padding: 5px 10px;
+    }
+  }
+}
