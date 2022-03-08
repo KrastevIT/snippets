@@ -1,0 +1,23 @@
+<div class="product__image">
+  {%- assign image_src = image | img_url: '500x' -%}
+  {%- assign image_src_zoom = image | img_url: '1024x' -%}
+
+  {% assign zoom_id = 'id=' | append: forloop.index | append: ' ' %}
+  {% assign data_zoom_image = 'data-zoom-image=' | append: image_src_zoom %}
+  {% assign attr = zoom_id | append: data_zoom_image %}
+
+  {% render 'image',
+    src: image_src,
+    text: image.alt,
+    fit: 'contain',
+    img_class: 'zoom-img',
+    attr: attr
+  %}
+</div><!-- /.product__image -->
+
+<img
+  class="zoom-img"
+  id="zoom_02"
+  src="{{ product.featured_image | image_url: width: 500 }}"
+  data-zoom-image="{{ product.featured_image | image_url: width: 1020 }}"
+>
