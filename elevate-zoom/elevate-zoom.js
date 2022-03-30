@@ -9,8 +9,8 @@ const zoomSetting = {
 
 $('.js-product-slider .slick-active img').ezPlus(zoomSetting);
 
-$('.js-product-slider').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
-   var img = $(slick.$slides[nextSlide]).find("img");
+$('.js-product-slider').on('afterChange', function(event, slick, currentSlide, nextSlide) {
+   var img = $(slick.$slider.find('.slick-active img'));
    $('.zoomWindowContainer,.zoomContainer').remove();
    $(img).ezPlus(zoomSetting);
 });
