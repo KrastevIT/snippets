@@ -1,0 +1,15 @@
+{% assign video_url = _block.video %}
+
+{% if _block.video.type == 'youtube' %}
+  {% assign video_url = 'https://www.youtube.com/embed/' | append:  _block.video.id %}
+{% endif %}
+
+<iframe
+  video-type="{{ _block.video.type }}"
+  frameborder="0"
+  allowfullscreen
+  width="100%"
+  height="100%"
+  src="{{ video_url }}"
+  >
+</iframe>
