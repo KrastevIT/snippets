@@ -1,0 +1,102 @@
+{% assign _section = section.settings %}
+
+{% assign product_primary = _section.products | first %}
+{% assign planId = blank %}
+{% assign selling_plan_allocations = product_primary.first_available_variant.selling_plan_allocations %}
+
+{% for allocation in selling_plan_allocations %}
+  {% if forloop.first %}
+    {% assign planId = allocation.selling_plan.id %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+<section class="section-product">
+  <div class="shell shell--small">
+    <div class="section__inner">
+      <div class="section__content">
+        <div class="form form--product">
+         {% form 'product', product_primary, class: 'form--subscription-product' %}
+            <input type="hidden" name="selling_plan" class="js-selling-plan-id" value="{{ planId }}">
+            <div class="form__body">
+              <div class="form__row">
+                <label class="form__label">choose your product</label>
+
+                <div class="form__controls">
+                  <div class="select select--arrow">
+                    <select name="product" id="js-product-select">
+                      {% for product in _section.products %}
+                        <option {% if forloop.first %}selected{% endif %} id="{{ product.id }}" value="{{ product.first_available_variant.id }}">{{ product.title }}</option>
+                      {% endfor %}
+                    </select>
+                  </div><!-- /.select -->
+                </div><!-- /.form__controls -->
+              </div><!-- /.form__row -->
+
+              <div class="form__row">
+                <label class="form__label">select frequency</label>
+
+                <div class="form__controls">
+                  {% for product in _section.products %}
+                    <div class="
+                      select select--arrow
+                      js-product-frequency-wrapper
+                      {% unless forloop.first %}hidden{% endunless %}"
+                      product-id="{{ product.first_available_variant.id }}"
+                    >
+                    <select name="frequency" id="frequency" class="js-subscription-selector">
+                        {% assign selling_plan_allocations = product.first_available_variant.selling_plan_allocations %}
+
+                        {% for allocation in selling_plan_allocations %}
+                          <option {% if forloop.first %}selected{% endif %} value="{{ allocation.selling_plan.id }}">
+                            {{ allocation.selling_plan.name }}
+                          </option>
+                        {% endfor %}
+                    </select>
+                   </div><!-- /.select -->
+                  {% endfor %}
+                </div><!-- /.form__controls -->
+              </div><!-- /.form__row -->
+
+              <div class="form__row">
+                <label class="hidden"></label>
+
+                <div class="form__controls form__controls--alt js-controler">
+                  <a href="#" class="form__down js-subscription-down"></a>
+
+                  <input type="number" class="field js-subscription-count" value="1" />
+
+                  <a href="#" class="form__up js-subscription-up">+</a>
+                </div><!-- /.form__controls -->
+              </div><!-- /.form__row -->
+            </div><!-- /.form__body -->
+
+            <div class="form__actions">
+              <button type="submit" class="form__btn form__btn--submit js-submit-subscription">add to bag</button>
+            </div><!-- /.form__actions -->
+         {% endform %}
+        </div><!-- /.form -->
+      </div><!-- /.section__content -->
+
+      <div class="section__image">
+        <img src="https://cdn.shopify.com/s/files/1/0473/7351/6953/files/sb-large-img.png" alt="">
+      </div><!-- /.section__image -->
+    </div><!-- /.section__inner -->
+  </div><!-- /.shell -->
+</section><!-- /.section-product -->
+
+{% schema %}
+{
+  "name": "Product choice",
+  "settings": [
+  {
+    "type": "product_list",
+    "id": "products",
+    "label": "Products"
+  }],
+  "presets": [{
+    "name": "Product choice"
+  }]
+}
+{% endschema %}
+
