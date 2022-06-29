@@ -1,0 +1,16 @@
+<p class="{{class}}">
+  {% assign start_data = 'now' | date: '%d-%m-%Y' %}
+  {% assign next_day = 'now' | date: '%d-' | plus: 1 %}
+  {% if next_day < 10 %}
+    {% assign next_day = next_day | prepend: 0 %}
+  {% endif %}
+  {% assign end_data =  'now' | date: '-%m-%Y' | prepend: next_day %}
+
+  {% assign date_text = 'products.product.dates' | t: start_data: start_data, end_data: end_data %}
+
+  {{ date_text | replace: '(tag)', '<strong>' | replace: '(tag_end)', '</strong>' }}
+</p><!-- /.{{class}} -->
+
+
+<!-- en.json
+"dates": "CONSEGNA PREVISTA: (tag){{start_data}}—{{end_data}}(tag_end) se ordini oggi.", -->
