@@ -1,0 +1,92 @@
+<div class="product__price" id="price-{{ section.id }}">
+  <p>
+    {{ _product.price | money }}
+  </p>
+
+  <del id="price-compare-{{ section.id }}" class="section__old-price {% if _product.compare_at_price < _product.price  %}hidden{% endif %}">{{ _product.compare_at_price | money }}</del>
+</div><!-- /.product__price -->
+
+<div class="section__form">
+  {%- assign product_form_id = 'product-form-' | append: section.id -%}
+  {%- form 'product', product, id: 'product-form-installment', class: 'form form--default product__form' -%}
+    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+    <input type="hidden" name="quantity" value="1">
+
+    <div class="form__body">
+      <div class="form__row">
+        <div class="form__controls">
+          <variant-radios class="form__variant-radios" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
+              {%- for option in product.options_with_values -%}
+                  <fieldset class="form__fieldset">
+                    <legend class="form__label">{{ option.name }}</legend>
+                      <div class="form__checkboxes">
+                        {%- for value in option.values -%}
+                          <input type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+                                name="{{ option.name }}"
+                                value="{{ value | escape }}"
+                                form="{{ product_form_id }}"
+                                {% if option.selected_value == value %}checked{% endif %}
+                          >
+                          <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
+                            {{ value }}
+                          </label>
+                        {%- endfor -%}
+                      </div><!-- /.form__checkboxes -->
+                  </fieldset><!-- /.form__fieldset -->
+              {%- endfor -%}
+            <script type="application/json">
+              {{ product.variants | json }}
+            </script>
+          </variant-radios><!-- /.form__variant-radios -->
+
+          <variant-selects class="form__variant-selects" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
+            {%- for option in product.options_with_values -%}
+              <div class="form__dropdown">
+                <label class="form__label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
+                  {{ option.name }}
+                </label><!-- /.form__label -->
+                <div class="select">
+                  <select id="Option-{{ section.id }}-{{ forloop.index0 }}"
+                    class="select__select"
+                    name="options[{{ option.name | escape }}]"
+                    form="{{ product_form_id }}"
+                  >
+                    {%- for value in option.values -%}
+                      <option value="{{ value | escape }}" {% if option.selected_value == value %}selected="selected"{% endif %}>
+                        {{ value }}
+                      </option>
+                    {%- endfor -%}
+                  </select>
+                </div>
+              </div><!-- /.form__dropdown-->
+            {%- endfor -%}
+
+            <script type="application/json">
+              {{ product.variants | json }}
+            </script>
+          </variant-selects><!-- /.form__variant-selects -->
+        </div><!-- /.form__controls -->
+      </div><!-- /.form__row -->
+    </div><!-- /.form__body -->
+
+    <div class="form__foot">
+      <button
+        type="submit"
+        name="add"
+        class="btn btn--block form__btn{% if settings.cart_type == 'drawer' %} js-ajax-add{% endif %}"
+
+        {% unless _product.available %}
+          disabled
+        {% endunless %}
+      >
+      <span>
+        {%- unless _product.available -%}
+          {{- 'products.product.sold_out' | t -}}
+        {%- else -%}
+          {{- 'products.product.add_to_cart' | t -}}
+        {%- endunless -%}
+      </span>
+      </button>
+    </div><!-- /.form__foot -->
+  {% endform %}
+</div><!-- /.section__form -->
