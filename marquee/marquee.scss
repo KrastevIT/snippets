@@ -1,0 +1,18 @@
+.announcement-bar {
+  white-space: nowrap;
+  overflow: hidden;
+  
+  .announcement__inner {
+    animation: marquee 20s linear infinite;
+    padding: 0 25px;
+  }
+
+  &:hover .announcement__inner {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes marquee {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(-100%, 0); }
+}
