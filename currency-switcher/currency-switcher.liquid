@@ -1,0 +1,12 @@
+<nav class="nav-lang js-currency">
+  {%- form 'currency' -%}
+    <ul>
+      {% for currency in shop.enabled_currencies %}
+        <li>
+          <input {% if currency == cart.currency %}checked="checked"{% endif %} type="radio" id="{{ currency.name }}" name="currency" value="{{ currency.iso_code }}">
+          <label for="{{ currency.name }}">{{ currency.iso_code }}</label><br>
+        </li>
+      {% endfor %}
+    </ul>
+  {%- endform -%}
+</nav><!-- /.nav-lang -->
