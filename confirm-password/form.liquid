@@ -1,0 +1,15 @@
+<input type="password" id="RegisterForm-password" name="customer[password]" aria-required="true" onkeyup="check();" class="field__input">
+<input type="password" id="RegisterForm-password2" name="customer[password]" aria-required="true" onkeyup="check();" class="field__input">
+
+<button type="submit" class="btn">Log In</button>
+
+<script>
+  var check = function() {
+  if (document.getElementById('RegisterForm-password').value ==
+    document.getElementById('RegisterForm-password2').value) {
+    document.getElementById('js-sign-up').classList.add('active');
+  } else {
+    document.getElementById('js-sign-up').classList.remove('active');
+  }
+}
+</script>
