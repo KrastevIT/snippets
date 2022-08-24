@@ -1,0 +1,11 @@
+<selector-switcher>
+  {% form 'localization' %}
+    <div class="selector-wrap">
+      <select name="language_code" id="languages">
+      {% for language in localization.available_languages %}
+        <option {% if language.iso_code == localization.language.iso_code %}selected{% endif %} value="{{ language.iso_code }}">{{ language.iso_code }}</option>
+      {% endfor %}
+      </select>
+    </div><!-- /.selector-wrap -->
+  {% endform %}
+</selector-switcher>
