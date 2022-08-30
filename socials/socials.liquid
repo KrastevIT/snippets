@@ -1,8 +1,9 @@
 {%- capture socials_list -%}
 social_instagram_link|Instagram,
 social_facebook_link|Facebook,
-social_twitter_link|Twitter,
 social_pinterest_link|Pinterest,
+social_tiktok_link|Tiktok,
+social_twitter_link|Twitter,
 social_tumblr_link|Tumblr,
 social_snapchat_link|Snapchat,
 social_youtube_link|Youtube,
@@ -16,7 +17,7 @@ social_vimeo_link|Vimeo
 
     {% assign link = settings[social_link_array.first] %}
     {% assign social_name = social_link_array.last %}
-    {% assign social_ico =  social_name | handle | append: '.png'%}
+    {% assign social_ico =  social_name | handle | append: '.svg'%}
 
     {% if link != blank %}
       <li>
