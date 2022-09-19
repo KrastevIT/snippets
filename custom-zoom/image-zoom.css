@@ -5,20 +5,9 @@
   overflow: hidden;
 }
 
-.img-zoom-lens {
-  display: none;
-}
-
 .img-zoom-container img {
   width: 100%;
-  height: 700px;
-}
-
-.img-zoom-lens {
-  display: block !important;
-  position: absolute;
-  border: 1px solid #d4d4d4;
-  transform: translate(-50%,-50%);
+  height: 100%;
 }
 
 .img-zoom-result {
@@ -32,4 +21,9 @@
   width: 194px;
   height: 150px;
   pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.img-zoom-result.hidden {
+  opacity: 0;
 }
