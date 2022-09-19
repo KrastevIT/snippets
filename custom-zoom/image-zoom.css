@@ -1,0 +1,35 @@
+.img-zoom-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.img-zoom-lens {
+  display: none;
+}
+
+.img-zoom-container img {
+  width: 100%;
+  height: 700px;
+}
+
+.img-zoom-lens {
+  display: block !important;
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  transform: translate(-50%,-50%);
+}
+
+.img-zoom-result {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-50%,-50%);
+  display: block !important;
+  background-repeat: no-repeat;
+  border: 1px solid #d4d4d4;
+  width: 194px;
+  height: 150px;
+  pointer-events: none;
+}
