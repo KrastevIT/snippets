@@ -1,15 +1,39 @@
-{% assign video_url = _block.video %}
+ <div class="section__video">
+  {% assign video_url = _section.video_url %}
 
-{% if _block.video.type == 'youtube' %}
-  {% assign video_url = 'https://www.youtube.com/embed/' | append:  _block.video.id %}
-{% endif %}
+  {%- if _section.video_external.type == 'youtube' -%}
+    {% assign video_url = 'https://www.youtube.com/embed/' | append: _section.video_external.id %}
+  {%- elsif _section.video_external.type == 'vimeo' -%}
+  {% assign video_url = 'https://player.vimeo.com/video/' | append: _section.video_external.id %}
+  {%- endif -%}
 
-<iframe
-  video-type="{{ _block.video.type }}"
-  frameborder="0"
-  allowfullscreen
-  width="100%"
-  height="100%"
-  src="{{ video_url }}"
-  >
-</iframe>
+  {% if _section.video_external != blank %}
+    <iframe src="{{ video_url }}" width="100%" height="auto" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+  {% elsif _section.video_url != blank %}
+    <video src="{{ video_url }}" controls></video>
+  {% endif %}
+</div><!-- /.section__video -->
+
+{% schema %}
+{
+  "name": "Video",
+  "settings": [
+  {
+    "type": "video_url",
+    "id": "video_external",
+    "label": "Video external",
+    "accept": [
+      "youtube",
+      "vimeo"
+    ]
+  },
+  {
+    "type": "url",
+    "id": "video_url",
+    "label": "Video mp4"
+  }],
+  "presets": [{
+    "name": "Video"
+  }]
+}
+{% endschema %}
