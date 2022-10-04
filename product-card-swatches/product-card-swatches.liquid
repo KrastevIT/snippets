@@ -1,0 +1,46 @@
+<card-product section-id="{{ section.id }}" id="{{ product_ref.handle }}">
+  <div class="card-product">
+
+    <div class="card__image">
+      {%- assign image_url =  product_ref.featured_image | image_url: width: 600 -%}
+
+      {% render 'image',
+        src: image_url,
+        text: product_ref.featured_image.image.alt
+      %}
+    </div><!-- /.card__image -->
+
+    <div class="card__content">
+      <h3 class="card__title">
+        {{ product_ref.title }}
+      </h3><!-- /.card__title -->
+
+      {%- render 'price', product_ref: product_ref, use_variant: true, price_class: 'js-price' -%}
+
+      <div class="product__swatches">
+        {% for option in product_ref.options_with_values %}
+          {%- assign option_name_handle = option.name | handle -%}
+          {% if option_name_handle != 'title' %}
+            {% for value in option.values %}
+              <input
+                type="radio"
+                id="{{- option.position -}}-{{- forloop.index0 -}}"
+                name="{{- option_name_handle -}}-{{- product_ref.id -}}"
+                value="{{- value | escape -}}"
+                {% if option.selected_value == value %}checked{% endif %}
+              >
+
+                <label for="{{- option.position -}}-{{- forloop.index0 -}}" title="{{- value | escape -}}">
+                  <span>{{- value -}}</span>
+                </label>
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+
+        <script type="application/json">
+          {{- product_ref.variants | json -}}
+        </script>
+      </div><!-- /.product__swatches -->
+    </div><!-- /.card__content -->
+  </div><!-- /.card-product -->
+</card-product>
