@@ -1,12 +1,34 @@
-<nav class="nav-lang js-currency">
-  {%- form 'currency' -%}
-    <ul>
-      {% for currency in shop.enabled_currencies %}
-        <li>
-          <input {% if currency == cart.currency %}checked="checked"{% endif %} type="radio" id="{{ currency.name }}" name="currency" value="{{ currency.iso_code }}">
-          <label for="{{ currency.name }}">{{ currency.iso_code }}</label><br>
-        </li>
-      {% endfor %}
-    </ul>
-  {%- endform -%}
-</nav><!-- /.nav-lang -->
+{{- 'currency-switcher.css' | asset_url | stylesheet_tag -}}
+
+<script src="{{ 'currency-switcher.js' | asset_url }}" defer="defer"></script>
+
+{% assign currency_checked = blank %}
+{% assign currencies = blank %}
+
+{% for currency in shop.enabled_currencies %}
+  {% if currency != cart.currency %}
+    {%- capture currencies -%}
+      {{ currencies }}
+      <li>
+        <input type="radio" id="{{ currency.name }}" name="currency" value="{{ currency.iso_code }}">
+        <label for="{{ currency.name }}">{{ currency.iso_code }} ({{ currency.symbol }})</label><br>
+      </li>
+    {%- endcapture -%}
+  {% else %}
+  {% assign currency_checked = currency.iso_code | append: ' ' | append: '(' | append: currency.symbol | append: ')' %}
+  {% endif %}
+{% endfor %}
+
+<currency-switcher>
+  <nav class="currency-switcher">
+    <a href="/" class="currency-switcher__active header__link-color-change js-toggle">
+      {{ currency_checked }}
+    </a><!-- /.currency-switcher__active -->
+
+    {%- form 'currency' -%}
+      <ul class="list-unstyled">
+       {{ currencies }}
+      </ul>
+    {%- endform -%}
+  </nav><!-- /.currency-switcher -->
+</currency-switcher>
