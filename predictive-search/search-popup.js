@@ -9,6 +9,7 @@
       this.buttonOpen = this.querySelector('.js-open');
       this.buttonClose = this.querySelector('.js-close');
       this.searchPopup = this.querySelector('.predictive-search');
+      this.input = this.querySelector('input[type="search"]');
     }
 
     connectedCallback() {
@@ -19,6 +20,7 @@
     open(e) {
       e.preventDefault();
       this.searchPopup.classList.add('is-visible');
+      this.input.focus();
     }
 
     close(e) {
