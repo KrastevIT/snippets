@@ -5,8 +5,9 @@
   left: 0;
   right: 0;
   height: 100vh;
-  padding: 0 4rem;
+  padding: 0 4rem 10rem;
   transition: opacity var(--duration-default);
+  overflow: auto;
   opacity: 0;
   pointer-events: none;
 }
@@ -71,6 +72,8 @@ input[type="search"]::-webkit-search-cancel-button {
 .predictive-search__result ul {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+  row-gap: 2rem;
 }
 
 .predictive-search__result li {
@@ -80,4 +83,5 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .predictive-search__actions {
   text-align: center;
+  margin-top: 40px;
 }
