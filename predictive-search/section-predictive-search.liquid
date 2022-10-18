@@ -1,13 +1,15 @@
 <div id="predictive-search-results">
-  <ul class="list-unstyled">
-    {%- for product in predictive_search.resources.products -%}
-      <li>
-        {% render 'card-product' product_ref: product %}
-      </li>
-    {%- endfor -%}
-  </ul>
+  {% if predictive_search.resources.products.size > 0 %}
+    <ul class="list-unstyled">
+      {%- for product in predictive_search.resources.products -%}
+        <li>
+          {% render 'card-product' product_ref: product %}
+        </li>
+      {%- endfor -%}
+    </ul>
 
-  <div class="predictive-search__actions">
-    <a href="{{ routes.collections_url }}" class="button button--outline">Shop more</a>
-  </div><!-- /.predictive-search__actions -->
+    <div class="predictive-search__actions">
+      <a href="{{ routes.collections_url }}" class="button button--outline">Shop more</a>
+    </div><!-- /.predictive-search__actions -->
+  {% endif %}
 </div>
