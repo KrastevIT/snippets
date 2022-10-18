@@ -10,6 +10,8 @@
       this.buttonClose = this.querySelector('.js-close');
       this.searchPopup = this.querySelector('.predictive-search');
       this.input = this.querySelector('input[type="search"]');
+      this.header = document.querySelector('.header');
+      this.body = document.querySelector('body');
     }
 
     connectedCallback() {
@@ -21,11 +23,22 @@
       e.preventDefault();
       this.searchPopup.classList.add('is-visible');
       this.input.focus();
+      this.header.setAttribute('is-open', '');
+
+      if(this.header.hasAttribute('transparent')) {
+        this.header.classList.remove('header--transparent');
+      }
     }
 
     close(e) {
       e.preventDefault();
       this.searchPopup.classList.remove('is-visible');
+      this.header.removeAttribute('is-open');
+      this.body.classList.remove('no-scroll');
+
+      if(this.header.hasAttribute('transparent')) {
+        this.header.classList.add('header--transparent');
+      }
     }
   }
 
