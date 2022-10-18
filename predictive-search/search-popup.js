@@ -28,6 +28,10 @@
       if(this.header.hasAttribute('transparent')) {
         this.header.classList.remove('header--transparent');
       }
+
+      if(this.searchPopup.querySelector('.card-product')) {
+        this.body.classList.add('no-scroll');
+      }
     }
 
     close(e) {
