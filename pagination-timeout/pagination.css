@@ -1,0 +1,67 @@
+.hero .splide__pagination button {
+  position: relative;
+  width: 0.8rem;
+  height: 0.8rem;
+  margin: 0;
+  border: none;
+  background-color: rgb(255 255 255 / 50%);
+}
+
+.hero .splide__pagination button[aria-current]::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  border: 2px solid #fff;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+  animation-timing-function: cubic-bezier(0, 0, 1, 1);
+}
+
+.hero hero-slider[data-autoplay='true'] button[aria-current]::after {
+  animation-name: clipCircle;
+}
+
+.hero .splide__pagination button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  border: 2px solid rgb(255 255 255 / 20%);
+  height: 1.8rem;
+  width: 1.8rem;
+  border-radius: 50%;
+}
+
+@keyframes clipCircle {
+  0% {
+    clip-path: polygon(50% 50%, 50% 0%, 0% 0%, 0% 50%, 0% 100%, 50% 100%, 100% 100%, 100% 50%, 100% 0%, 50% 0%);
+  }
+  12.5% {
+    clip-path: polygon(50% 50%, 50% 0%, 0% 0%, 0% 50%, 0% 100%, 50% 100%, 100% 100%, 100% 50%, 100% 0%, 100% 0%);
+  }
+  25% {
+    clip-path: polygon(50% 50%, 50% 0%, 0% 0%, 0% 50%, 0% 100%, 50% 100%, 100% 100%, 100% 50%, 100% 50%, 100% 50%);
+  }
+  37.5% {
+    clip-path: polygon(50% 50%, 50% 0%, 0% 0%, 0% 50%, 0% 100%, 50% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%);
+  }
+  50% {
+    clip-path: polygon(50% 50%, 50% 0%, 0% 0%, 0% 50%, 0% 100%, 50% 100%, 50% 100%, 50% 100%, 50% 100%, 50% 100%);
+  }
+  62.5% {
+     clip-path: polygon(50% 50%, 50% 0%, 0% 0%, 0% 50%, 0% 100%, 0% 100%, 0% 100%, 0% 100%, 0% 100%, 0% 100%);
+  }
+  75% {
+    clip-path: polygon(50% 50%, 50% 0%, 0% 0%, 0% 50%, 0% 50%, 0% 50%, 0% 50%, 0% 50%, 0% 50%, 0% 50%);
+  }
+  87.5% {
+     clip-path: polygon(50% 50%, 50% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%);
+  }
+  100% {
+    clip-path: polygon(50% 50%, 50% 0%, 50% 0%, 50% 0%, 50% 0%, 50% 0%, 50% 0%, 50% 0%, 50% 0%, 50% 0%);
+  }
+}
