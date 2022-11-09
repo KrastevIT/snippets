@@ -1,24 +1,18 @@
-    move(event) {
-      const button = event.currentTarget;
+this.slider.on('move', this.stateArrows.bind(this));
 
-      if(button.hasAttribute('next')) {
-        this.slider.Components.Controller.go('>');
-      } else {
-        this.slider.Components.Controller.go('<');
-      }
+stateArrows() {
+  const indexSlide = this.slider.Components.Controller.getIndex();
+  const endIndex = this.slider.Components.Controller.getEnd();
 
-      const indexSlide = this.slider.Components.Controller.getIndex();
-      const endIndex = this.slider.Components.Controller.getEnd();
+  if(indexSlide == 0) {
+    this.arrowPrev.setAttribute('disabled', '');
+  }else {
+    this.arrowPrev.removeAttribute('disabled');
+  }
 
-      if(indexSlide == 0) {
-        this.arrowPrev.setAttribute('disabled', '');
-      }else {
-        this.arrowPrev.removeAttribute('disabled');
-      }
-
-      if(indexSlide == endIndex) {
-        this.arrowNext.setAttribute('disabled', '');
-      } else {
-        this.arrowNext.removeAttribute('disabled');
-      }
-    }
+  if(indexSlide == endIndex) {
+    this.arrowNext.setAttribute('disabled', '');
+  } else {
+    this.arrowNext.removeAttribute('disabled');
+  }
+}
