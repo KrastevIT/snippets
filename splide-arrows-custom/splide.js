@@ -1,5 +1,15 @@
 this.slider.on('move', this.stateArrows.bind(this));
 
+move(event) {
+  const button = event.currentTarget;
+
+  if(button.hasAttribute('next')) {
+    this.slider.Components.Controller.go('>')
+  } else {
+    this.slider.Components.Controller.go('<')
+  }
+}
+
 stateArrows() {
   const indexSlide = this.slider.Components.Controller.getIndex();
   const endIndex = this.slider.Components.Controller.getEnd();
