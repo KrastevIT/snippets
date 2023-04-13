@@ -3,11 +3,11 @@
 
 <currency-switcher>
   <nav class="currency-switcher header__link-color-change">
-    <a href="/" class="currency-switcher__active header__link-color-change hover-icon hover-underline hover-underline--icon js-toggle">
+    <button type="button" class="currency-switcher__active header__link-color-change hover-icon hover-underline hover-underline--icon">
       {{ cart.currency.iso_code | append: ' ' | append: '(' | append: cart.currency.symbol | append: ')' }}
 
       <span class="icon">{% render 'icon-arrow-dropdown' %}</span>
-    </a><!-- /.currency-switcher__active -->
+    </button><!-- /.currency-switcher__active -->
 
     {%- form 'currency' -%}
       <ul class="list-unstyled">
