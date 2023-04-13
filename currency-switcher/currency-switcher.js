@@ -7,15 +7,18 @@
     constructor() {
       super();
       this.inputs = this.querySelectorAll('input');
-      this.toggleElement = this.querySelector('.js-toggle');
+      this.toggleButton = this.querySelector('button[type="button"]');
     }
 
     connectedCallback() {
       this.inputs.forEach(input => {
         input.addEventListener('change', this.submit.bind(this));
-      })
+      });
 
-      this.toggleElement.addEventListener('click', this.toggle.bind(this));
+      this.toggleButton.addEventListener(
+        'click',
+        this.toggle.bind(this)
+      );
       document.addEventListener('click', this.close.bind(this));
     }
 
@@ -26,17 +29,18 @@
     toggle(event) {
       event.preventDefault();
 
-      if(this.hasAttribute('open')) {
-        this.removeAttribute('open');
-      } else {
-        this.setAttribute('open', '');
+      if (this.hasAttribute('open')) {
+        this.toggleButton.blur();
       }
+
+      this.toggleAttribute('open');
     }
 
     close(event) {
-     if(!event.target.closest('currency-switcher')) {
-      this.removeAttribute('open');
-     }
+      if (!event.target.closest('currency-switcher')) {
+        this.removeAttribute('open');
+        this.toggleButton.blur();
+      }
     }
   }
 
